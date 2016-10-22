@@ -11,107 +11,110 @@ using GlobalHack.Models;
 
 namespace GlobalHack.Controllers
 {
-    public class PeopleController : Controller
+    public class SheltersController : Controller
     {
         private Data db = new Data();
 
-        // GET: People
-        public ActionResult Index()
+        // GET: Shelters
+        public ActionResult Index(int personId)
         {
-            return View(db.Persons.ToList());
+            var Person = db.Persons.Find(personId);
+            var personAge = DateTime.Now.Year - Person.BirthYear;
+            var dbShelters = db.Shelters.Where(shelter => shelter.MaxAge > personAge);
+            return View(dbShelters.ToList());
         }
 
-        // GET: People/Details/5
+        // GET: Shelters/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
-            if (person == null)
+            Shelter shelter = db.Shelters.Find(id);
+            if (shelter == null)
             {
                 return HttpNotFound();
             }
-            return View(person);
+            return View(shelter);
         }
 
-        // GET: People/Create
+        // GET: Shelters/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: People/Create
+        // POST: Shelters/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,BirthYear,Gender,NumChildren,Pregnant,Transgender,SexOffender")] Person person)
+        public ActionResult Create([Bind(Include = "Id,Name,Address,Phone,Location,Beds,MinAge,MaxAge,GenderRestriction,PregnantOnly,SexOffenderRestriction")] Shelter shelter)
         {
             if (ModelState.IsValid)
             {
-                db.Persons.Add(person);
+                db.Shelters.Add(shelter);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Shelters", new {personId=person.Id });
+                return RedirectToAction("Index");
             }
 
-            return View(person);
+            return View(shelter);
         }
 
-        // GET: People/Edit/5
+        // GET: Shelters/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
-            if (person == null)
+            Shelter shelter = db.Shelters.Find(id);
+            if (shelter == null)
             {
                 return HttpNotFound();
             }
-            return View(person);
+            return View(shelter);
         }
 
-        // POST: People/Edit/5
+        // POST: Shelters/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,BirthYear,Gender,NumChildren,Pregnant,Transgender,SexOffender")] Person person)
+        public ActionResult Edit([Bind(Include = "Id,Name,Address,Phone,Location,Beds,MinAge,MaxAge,GenderRestriction,PregnantOnly,SexOffenderRestriction")] Shelter shelter)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(person).State = EntityState.Modified;
+                db.Entry(shelter).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(person);
+            return View(shelter);
         }
 
-        // GET: People/Delete/5
+        // GET: Shelters/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
-            if (person == null)
+            Shelter shelter = db.Shelters.Find(id);
+            if (shelter == null)
             {
                 return HttpNotFound();
             }
-            return View(person);
+            return View(shelter);
         }
 
-        // POST: People/Delete/5
+        // POST: Shelters/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Person person = db.Persons.Find(id);
-            db.Persons.Remove(person);
+            Shelter shelter = db.Shelters.Find(id);
+            db.Shelters.Remove(shelter);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
