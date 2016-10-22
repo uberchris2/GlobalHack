@@ -18,7 +18,7 @@ namespace GlobalHack.Controllers
         // GET: Reservations
         public ActionResult Index(int personId)
         {
-            var dbReservations = db.Reservations.Where(r => r.PersonId == personId);
+            var dbReservations = db.Reservations.Include(r => r.Shelter).Where(r => r.PersonId == personId);
             ViewBag.PersonId = personId;
             return View(dbReservations.ToList());
         }

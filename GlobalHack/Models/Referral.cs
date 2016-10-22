@@ -12,5 +12,6 @@ namespace GlobalHack.Models
         public string Title { get; set; }
         public string Notes { get; set; }
         public int? ShelterId { get; set; }
+        public Shelter Shelter { get; set; }
     }
 }

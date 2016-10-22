@@ -4,6 +4,9 @@
     ViewBag.Title = "Index";
 }
 
+<h2>Referrals</h2>
+
+
 <table class="table">
     <tr>
         <th>
@@ -13,7 +16,7 @@
             @Html.DisplayNameFor(model => model.Notes)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ShelterId)
+            Shelter
         </th>
     </tr>
 
@@ -26,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.Notes)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ShelterId)
+            @Html.DisplayFor(modelItem => item.Shelter.Name)
         </td>
     </tr>
 }

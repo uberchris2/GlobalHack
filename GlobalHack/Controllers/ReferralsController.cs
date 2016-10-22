@@ -18,7 +18,7 @@ namespace GlobalHack.Controllers
         // GET: Referrals
         public ActionResult Index(int personId)
         {
-            var dbReferrals = db.Referrals.Where(r => r.PersonId == personId);
+            var dbReferrals = db.Referrals.Include(r => r.Shelter).Where(r => r.PersonId == personId);
             ViewBag.PersonId = personId;
             return View(dbReferrals.ToList());
         }
