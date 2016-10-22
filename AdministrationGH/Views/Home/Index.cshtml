@@ -5,7 +5,7 @@
 @{
     ViewBag.Title = "Home Page";
     var allShelters = (List<GlobalHack.Models.Shelter>)ViewBag.allShelters;
-    var myLocalShelter = (List<GlobalHack.Models.Shelter>)ViewBag.myLocalShelter;
+    var myLocalShelter = (GlobalHack.Models.Shelter)ViewBag.myLocalShelter;
     var youthShelters = (Dictionary<GlobalHack.Models.Shelter, int>)ViewBag.youthShelters;
     var maleOnlyShelters = (Dictionary<GlobalHack.Models.Shelter, int>)ViewBag.maleOnlyShelters;
     var pregnantOnlyShelters = (Dictionary<GlobalHack.Models.Shelter,int>)ViewBag.pregnantOnlyShelters;
@@ -16,35 +16,53 @@
 <div class="row">
     <div class="row">
         <div class="col-md-12">
-            <h2>My Shelter</h2>
-            @Html.DisplayNameFor(model => model.Name) - @Html.DisplayFor(modelItem => myLocalShelter.First().Name) <br />
-            @Html.DisplayNameFor(model => model.Phone) - @Html.DisplayFor(modelItem => myLocalShelter.First().Phone)<br />
-            @Html.DisplayNameFor(model => model.Beds) - @Html.DisplayFor(modelItem => myLocalShelter.First().Beds) <br />
-            @Html.DisplayNameFor(model => model.Location) - @Html.DisplayFor(modelItem => myLocalShelter.First().Location) <br />
-            Beds Available -  @myBedsAvailable <br />
-            
-            <h4>Reservations Tonight</h4>
-                @if (myReservations.Count == 0)
-                {
-                    <div class="row">
-                        <div class="col-md-8">
-                            No reservations for tonight!
-                        </div>
+    <h2>My Shelter</h2>
+    @Html.DisplayNameFor(model => model.Name) - @Html.DisplayFor(modelItem => myLocalShelter.Name) <br />
+    @Html.DisplayNameFor(model => model.Phone) - @Html.DisplayFor(modelItem => myLocalShelter.Phone)<br />
+    @Html.DisplayNameFor(model => model.Beds) - @Html.DisplayFor(modelItem => myLocalShelter.Beds) <br />
+    @Html.DisplayNameFor(model => model.Location) - @Html.DisplayFor(modelItem => myLocalShelter.Location) <br />
+    Beds Available -  @myBedsAvailable <br />
+
+    <h4>Reservations Tonight</h4>
+    @if (myReservations.Count == 0)
+    {
+        <div class="row">
+            <div class="col-md-8">
+                No reservations for tonight!
+            </div>
+        </div>
+    }
+    else
+    {
+        int i = 0;
+        foreach (var reservation in myReservations)
+        {
+            if (i%3 == 0) {
+                @Html.Raw("<div class=\"row\">");
+                    <div class="col-md-4">
+                        Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
+                        Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
+                        Person Name - @Html.DisplayFor(modelItem => reservation.PersonId) <br/>
                     </div>
-                }
-                else
-                {
-                    foreach (var reservation in myReservations)
-                    {
-                        <div class="row">
-                            <div class="col-md-8">
-                                Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
-                                Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
-                                Person Name - @Html.DisplayFor(modelItem => reservation.PersonId) <br/>
-                            </div>
-                        </div>
-                    }
-                }
+            }
+            if (@i%3==1) {
+                    <div class="col-md-4">
+                        Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
+                        Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
+                        Person Name - @Html.DisplayFor(modelItem => reservation.PersonId) <br/>
+                    </div>
+            }
+            if (@i%3==2) {
+                    <div class="col-md-4">
+                        Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
+                        Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
+                        Person Name - @Html.DisplayFor(modelItem => reservation.PersonId) <br/>
+                    </div>
+                @Html.Raw("</div>");
+            }
+            i++;
+        }
+    }
             @Html.ActionLink("Track New Shelter", "Create", "Shelters")
         </div>
     </div>
