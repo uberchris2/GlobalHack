@@ -13,7 +13,7 @@ namespace GlobalHack
         {
         }
 
-        public virtual DbSet<Person> Groups { get; set; }
+        public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Referral> Referrals { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<Shelter> Shelters { get; set; }
