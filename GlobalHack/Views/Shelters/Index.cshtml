@@ -4,82 +4,41 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<script src='https://api.mapbox.com/mapbox.js/v3.0.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v3.0.0/mapbox.css' rel='stylesheet' />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Beds)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MinAge)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxAge)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GenderRestriction)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PregnantOnly)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SexOffenderRestriction)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Beds)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MinAge)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxAge)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GenderRestriction)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PregnantOnly)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SexOffenderRestriction)
-        </td>
-        <td>
-            @Html.ActionLink("Reserve", "Create", "Reservations", new { shelterId=item.Id, personId=ViewBag.PersonId }, null)
-        </td>
-    </tr>
-}
+<div id="map" style="height: 600px;width: 100%"></div>
 
-</table>
+<script>
+    var shelters = @Html.Raw(Json.Encode(Model));
+
+
+
+    var geojson = [];
+    //Html.ActionLink("Reserve", "Create", "Reservations", new { shelterId = item.Id, personId = ViewBag.PersonId }, null)
+    shelters.forEach(shelter => {
+        geojson.push({
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [parseFloat(shelter.Location.split(',')[0]), parseFloat(shelter.Location.split(',')[1])]
+            },
+            properties: {
+                title: ("<a href='@Url.Action("Create","Reservations", new { shelterId = "SHELTERID", personId = "PERSONID" })'>" + shelter.Name + "</a>")
+                    .replace('SHELTERID', shelter.Id).replace('PERSONID', @ViewBag.PersonId),
+                description: shelter.Address,
+                'marker-color': '#3ca0d3',
+                'marker-size': 'large',
+                'marker-symbol': 'lodging'
+            }
+        });
+    });
+
+    // Provide your access token
+    L.mapbox.accessToken = 'pk.eyJ1IjoidWJlcmNocmlzIiwiYSI6IjUtbTlEYTgifQ.sXXgD7Gs0xCEkYVTBadmyg';
+    // Create a map in the div #map
+    var mapGeo = L.mapbox.map('map', 'mapbox.streets').setView([38.625392, -90.193977], 12);   // latitude 40, longitude -75, zoom level 9
+
+    var myLayer = L.mapbox.featureLayer(geojson, {sanitizer: function(input) {return input;} }).addTo(mapGeo);
+</script>

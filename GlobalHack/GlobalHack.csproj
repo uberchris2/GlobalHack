@@ -146,6 +146,10 @@
     <Compile Include="Migrations\201610221624506_EstablishRelationships.Designer.cs">
       <DependentUpon>201610221624506_EstablishRelationships.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610222139338_AddAuth.cs" />
+    <Compile Include="Migrations\201610222139338_AddAuth.Designer.cs">
+      <DependentUpon>201610222139338_AddAuth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Referral.cs" />
     <Compile Include="Models\Shelter.cs" />
@@ -220,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610221624506_EstablishRelationships.resx">
       <DependentUpon>201610221624506_EstablishRelationships.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610222139338_AddAuth.resx">
+      <DependentUpon>201610222139338_AddAuth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
