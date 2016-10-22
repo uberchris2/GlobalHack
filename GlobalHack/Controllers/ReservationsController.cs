@@ -11,111 +11,112 @@ using GlobalHack.Models;
 
 namespace GlobalHack.Controllers
 {
-    public class SheltersController : Controller
+    public class ReservationsController : Controller
     {
         private Data db = new Data();
 
-        // GET: Shelters
-        public ActionResult Index(int personId)
+        // GET: Reservations
+        public ActionResult Index()
         {
-            var person = db.Persons.Find(personId);
-            ViewBag.PersonId = personId;
-            var personAge = DateTime.Now.Year - person.BirthYear;
-            var dbShelters = db.Shelters.Where(shelter => shelter.MaxAge > personAge);
-            return View(dbShelters.ToList());
+            
+            return View(db.Reservations.ToList());
         }
 
-        // GET: Shelters/Details/5
+        // GET: Reservations/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Shelter shelter = db.Shelters.Find(id);
-            if (shelter == null)
+            Reservation reservation = db.Reservations.Find(id);
+            if (reservation == null)
             {
                 return HttpNotFound();
             }
-            return View(shelter);
+            return View(reservation);
         }
 
-        // GET: Shelters/Create
-        public ActionResult Create()
+        // GET: Reservations/Create
+        public ActionResult Create(int shelterId, int personId)
         {
+            ViewBag.ShelterId = shelterId;
+            ViewBag.PersonId = personId;
             return View();
         }
 
-        // POST: Shelters/Create
+        // POST: Reservations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Address,Phone,Location,Beds,MinAge,MaxAge,GenderRestriction,PregnantOnly,SexOffenderRestriction")] Shelter shelter)
+        public ActionResult Create([Bind(Include = "Id,PersonId,ShelterId,Date,Confirmed")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
-                db.Shelters.Add(shelter);
+                reservation.Date = DateTime.Now;
+                reservation.Confirmed = true;
+                db.Reservations.Add(reservation);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(shelter);
+            return View(reservation);
         }
 
-        // GET: Shelters/Edit/5
+        // GET: Reservations/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Shelter shelter = db.Shelters.Find(id);
-            if (shelter == null)
+            Reservation reservation = db.Reservations.Find(id);
+            if (reservation == null)
             {
                 return HttpNotFound();
             }
-            return View(shelter);
+            return View(reservation);
         }
 
-        // POST: Shelters/Edit/5
+        // POST: Reservations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Address,Phone,Location,Beds,MinAge,MaxAge,GenderRestriction,PregnantOnly,SexOffenderRestriction")] Shelter shelter)
+        public ActionResult Edit([Bind(Include = "Id,PersonId,ShelterId,Date,Confirmed")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(shelter).State = EntityState.Modified;
+                db.Entry(reservation).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(shelter);
+            return View(reservation);
         }
 
-        // GET: Shelters/Delete/5
+        // GET: Reservations/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Shelter shelter = db.Shelters.Find(id);
-            if (shelter == null)
+            Reservation reservation = db.Reservations.Find(id);
+            if (reservation == null)
             {
                 return HttpNotFound();
             }
-            return View(shelter);
+            return View(reservation);
         }
 
-        // POST: Shelters/Delete/5
+        // POST: Reservations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Shelter shelter = db.Shelters.Find(id);
-            db.Shelters.Remove(shelter);
+            Reservation reservation = db.Reservations.Find(id);
+            db.Reservations.Remove(reservation);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
