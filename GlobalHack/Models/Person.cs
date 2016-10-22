@@ -19,6 +19,8 @@ namespace GlobalHack.Models
         public bool Transgender { get; set; }
         [Display(Name = "Registered Sex Offender")]
         public bool SexOffender { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
         public ICollection<Referral> Referrals { get; set; }
     }
