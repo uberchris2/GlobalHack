@@ -1,31 +1,77 @@
-﻿@{
+﻿<!--@model IEnumerable<GlobalHack.Models.Shelter>
+    
+    -->
+@{
     ViewBag.Title = "Home Page";
+    var allShelters = (List<GlobalHack.Models.Shelter>)ViewBag.allShelters;
+    var myLocalShelter = (List<GlobalHack.Models.Shelter>)ViewBag.myLocalShelter;
+    var youthShelters = (List<GlobalHack.Models.Shelter>)ViewBag.youthShelters;
+    var myReservations = (List<GlobalHack.Models.Reservation>)ViewBag.myReservations;
+    var myBedsAvailable = (int?)ViewBag.bedsAvailable;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>My Shelter</h2>
+            @Html.DisplayNameFor(model => model.Name) - @Html.DisplayFor(modelItem => myLocalShelter.First().Name) <br />
+            @Html.DisplayNameFor(model => model.Phone) - @Html.DisplayFor(modelItem => myLocalShelter.First().Phone)<br />
+            @Html.DisplayNameFor(model => model.Beds) - @Html.DisplayFor(modelItem => myLocalShelter.First().Beds) <br />
+            @Html.DisplayNameFor(model => model.Location) - @Html.DisplayFor(modelItem => myLocalShelter.First().Location) <br />
+            Beds Available -  @myBedsAvailable <br />
+            
+            <h4>Reservations Tonight</h4>
+                @if (myReservations.Count == 0)
+                {
+                    <div class="row">
+                        <div class="col-md-8">
+                            No reservations for tonight!
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    foreach (var reservation in myReservations)
+                    {
+                        <div class="row">
+                            <div class="col-md-8">
+                                Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
+                                Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
+                                Person Name - @Html.DisplayFor(modelItem => reservation.PersonId) <br/>
+                            </div>
+                        </div>
+                    }
+                }
+            @Html.ActionLink("Track New Shelter", "Create", "Shelters")
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2> Youth Shelters</h2>
+            @if (youthShelters.Count == 0)
+            {
+                <div class="row">
+                    <div class="col-md-8">
+                        No youth shelters for tonight!
+                    </div>
+                </div>
+            }
+            else
+            {
+                foreach (var ys in youthShelters)
+                {
+                    <div class="row">
+                        <div class="col-md-8">
+                            Name- @Html.DisplayFor(modelItem => ys.Name) <br />
+                            Contact Phone- @Html.DisplayFor(modelItem => ys.Phone) <br />
+                            Address- @Html.DisplayFor(modelItem => ys.Location) <br />
+                            Total Beds- @Html.DisplayFor(modelItem => ys.Beds) <br />
+                            Total Beds- @myBedsAvailable <br />
+                        </div>
+                    </div>
+                }
+            }
+        </div>
     </div>
 </div>

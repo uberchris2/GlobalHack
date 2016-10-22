@@ -23,8 +23,21 @@ namespace AdministrationGH
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/sb-admin-2").Include(
+                      "~/Scripts/metisMenu.min.js",
+                      "~/Scripts/morris-data.js",
+                      "~/Scripts/morris.min.js",
+                      "~/Scripts/raphael.min.js",
+                      "~/Scripts/metisMenu.min.js",
+                      "~/Scripts/sb-admin-2.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/site.css",
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/metisMenu.min.css",
+                      "~/Content/morris.css",
+                      "~/Content/sb-admin-2.min.css",
                       "~/Content/site.css"));
         }
     }

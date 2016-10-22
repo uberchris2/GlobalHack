@@ -16,8 +16,11 @@ namespace AdministrationGH
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
+                namespaces: new [] { "AdministrationGH.Controllers" },
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
+
+
     }
 }

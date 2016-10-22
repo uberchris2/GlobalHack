@@ -129,6 +129,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\ReferralsController.cs" />
+    <Compile Include="Controllers\SheltersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -137,12 +140,27 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\metisMenu.min.css" />
+    <Content Include="Content\morris.css" />
+    <Content Include="Content\sb-admin-2.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Scripts\metisMenu.min.js" />
+    <Content Include="Scripts\morris-data.js" />
+    <Content Include="Scripts\morris.min.js" />
+    <Content Include="Scripts\raphael.min.js" />
+    <Content Include="Scripts\sb-admin-2.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -169,6 +187,22 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\People\Create.cshtml" />
+    <Content Include="Views\People\Delete.cshtml" />
+    <Content Include="Views\People\Details.cshtml" />
+    <Content Include="Views\People\Edit.cshtml" />
+    <Content Include="Views\People\Index.cshtml" />
+    <Content Include="Views\Shelters\Create.cshtml" />
+    <Content Include="Views\Shelters\Delete.cshtml" />
+    <Content Include="Views\Shelters\Details.cshtml" />
+    <Content Include="Views\Shelters\Edit.cshtml" />
+    <Content Include="Views\Shelters\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminConsole.cshtml" />
+    <Content Include="Views\Referrals\Create.cshtml" />
+    <Content Include="Views\Referrals\Delete.cshtml" />
+    <Content Include="Views\Referrals\Details.cshtml" />
+    <Content Include="Views\Referrals\Edit.cshtml" />
+    <Content Include="Views\Referrals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
