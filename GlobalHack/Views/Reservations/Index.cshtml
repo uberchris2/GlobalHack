@@ -4,18 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Reservations</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PersonId)
+            Shelter
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ShelterId)
+            Address
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
@@ -29,10 +26,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.PersonId)
+            @Html.DisplayFor(modelItem => item.Shelter.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ShelterId)
+            @Html.DisplayFor(modelItem => item.Shelter.Address)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
@@ -41,11 +38,16 @@
             @Html.DisplayFor(modelItem => item.Confirmed)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @if (!item.Confirmed && item.Date.Date == DateTime.Now.Date)
+            {
+                @Html.ActionLink("Confirm", "Confirm", new { id = item.Id })
+            }
         </td>
     </tr>
 }
 
 </table>
+
+<div>
+    @Html.ActionLink("Back to options", "Index", "People", new { Id = ViewBag.PersonId }, null)
+</div>

@@ -132,6 +132,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\ReferralsController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\SheltersController.cs" />
     <Compile Include="Data.cs" />
@@ -149,6 +150,10 @@
     <Compile Include="Migrations\201610222139338_AddAuth.cs" />
     <Compile Include="Migrations\201610222139338_AddAuth.Designer.cs">
       <DependentUpon>201610222139338_AddAuth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610222252390_correctFK.cs" />
+    <Compile Include="Migrations\201610222252390_correctFK.Designer.cs">
+      <DependentUpon>201610222252390_correctFK.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Referral.cs" />
@@ -206,6 +211,11 @@
     <Content Include="Views\Reservations\Details.cshtml" />
     <Content Include="Views\Reservations\Edit.cshtml" />
     <Content Include="Views\Reservations\Index.cshtml" />
+    <Content Include="Views\Referrals\Create.cshtml" />
+    <Content Include="Views\Referrals\Delete.cshtml" />
+    <Content Include="Views\Referrals\Details.cshtml" />
+    <Content Include="Views\Referrals\Edit.cshtml" />
+    <Content Include="Views\Referrals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -227,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610222139338_AddAuth.resx">
       <DependentUpon>201610222139338_AddAuth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610222252390_correctFK.resx">
+      <DependentUpon>201610222252390_correctFK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,6 +11,7 @@ namespace GlobalHack.Models
         public int PersonId { get; set; }
         public Person Person { get; set; }
         public int ShelterId { get; set; }
+        public Shelter Shelter { get; set; }
         public DateTime Date { get; set; }
         public bool Confirmed { get; set; }
     }

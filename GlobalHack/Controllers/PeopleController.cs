@@ -16,9 +16,9 @@ namespace GlobalHack.Controllers
         private Data db = new Data();
 
         // GET: People
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View(db.Persons.ToList());
+            return View(db.Persons.Find(id));
         }
 
         // GET: People/Details/5
@@ -47,7 +47,7 @@ namespace GlobalHack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,BirthYear,Gender,NumChildren,Pregnant,Transgender,SexOffender")] Person person)
+        public ActionResult Create([Bind(Include = "Id,Name,BirthYear,Gender,NumChildren,Pregnant,Transgender,SexOffender,Username,Password")] Person person)
         {
             if (ModelState.IsValid)
             {

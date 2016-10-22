@@ -10,13 +10,15 @@
 
 <div id="map" style="height: 600px;width: 100%"></div>
 
+
+<div>
+    @Html.ActionLink("Back to options", "Index", "People", new { Id = ViewBag.PersonId }, null)
+</div>
+
 <script>
     var shelters = @Html.Raw(Json.Encode(Model));
 
-
-
     var geojson = [];
-    //Html.ActionLink("Reserve", "Create", "Reservations", new { shelterId = item.Id, personId = ViewBag.PersonId }, null)
     shelters.forEach(shelter => {
         geojson.push({
             type: 'Feature',

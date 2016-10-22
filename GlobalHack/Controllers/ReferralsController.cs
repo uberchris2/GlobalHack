@@ -11,125 +11,111 @@ using GlobalHack.Models;
 
 namespace GlobalHack.Controllers
 {
-    public class ReservationsController : Controller
+    public class ReferralsController : Controller
     {
         private Data db = new Data();
 
-        // GET: Reservations
+        // GET: Referrals
         public ActionResult Index(int personId)
         {
-            var dbReservations = db.Reservations.Include(r => r.Shelter).Where(r => r.PersonId == personId);
+            var dbReferrals = db.Referrals.Include(r => r.Shelter).Where(r => r.PersonId == personId);
             ViewBag.PersonId = personId;
-            return View(dbReservations.ToList());
+            return View(dbReferrals.ToList());
         }
 
-        // GET: Reservations/Details/5
+        // GET: Referrals/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reservation reservation = db.Reservations.Find(id);
-            if (reservation == null)
+            Referral referral = db.Referrals.Find(id);
+            if (referral == null)
             {
                 return HttpNotFound();
             }
-            return View(reservation);
+            return View(referral);
         }
 
-        // GET: Reservations/Create
-        public ActionResult Create(int shelterId, int personId)
+        // GET: Referrals/Create
+        public ActionResult Create()
         {
-            var person = db.Persons.Find(personId);
-            var shelter = db.Shelters.Find(shelterId);
-            ViewBag.Person = person;
-            ViewBag.Shelter = shelter;
             return View();
         }
 
-        // POST: Reservations/Create
+        // POST: Referrals/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PersonId,ShelterId,Date,Confirmed")] Reservation reservation)
+        public ActionResult Create([Bind(Include = "Id,PersonId,Title,Notes,ShelterId")] Referral referral)
         {
             if (ModelState.IsValid)
             {
-                reservation.Date = DateTime.Now;
-                reservation.Confirmed = true;
-                db.Reservations.Add(reservation);
+                db.Referrals.Add(referral);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Reservations", new {personId = reservation.PersonId});
+                return RedirectToAction("Index");
             }
 
-            return View(reservation);
+            return View(referral);
         }
 
-        // GET: Reservations/Edit/5
+        // GET: Referrals/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reservation reservation = db.Reservations.Find(id);
-            if (reservation == null)
+            Referral referral = db.Referrals.Find(id);
+            if (referral == null)
             {
                 return HttpNotFound();
             }
-            return View(reservation);
+            return View(referral);
         }
 
-        // POST: Reservations/Edit/5
+        // POST: Referrals/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PersonId,ShelterId,Date,Confirmed")] Reservation reservation)
+        public ActionResult Edit([Bind(Include = "Id,PersonId,Title,Notes,ShelterId")] Referral referral)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reservation).State = EntityState.Modified;
+                db.Entry(referral).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(reservation);
+            return View(referral);
         }
 
-        // GET: Reservations/Delete/5
+        // GET: Referrals/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reservation reservation = db.Reservations.Find(id);
-            if (reservation == null)
+            Referral referral = db.Referrals.Find(id);
+            if (referral == null)
             {
                 return HttpNotFound();
             }
-            return View(reservation);
+            return View(referral);
         }
 
-        // POST: Reservations/Delete/5
+        // POST: Referrals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Reservation reservation = db.Reservations.Find(id);
-            db.Reservations.Remove(reservation);
+            Referral referral = db.Referrals.Find(id);
+            db.Referrals.Remove(referral);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult Confirm(int id)
-        {
-            var reservation = db.Reservations.Find(id);
-            reservation.Confirmed = true;
-            db.SaveChanges();
-            return RedirectToAction("Index", "Reservations", new { personId = reservation.PersonId });
         }
 
         protected override void Dispose(bool disposing)
