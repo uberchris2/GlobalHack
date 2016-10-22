@@ -16,10 +16,10 @@ namespace GlobalHack.Controllers
         private Data db = new Data();
 
         // GET: Reservations
-        public ActionResult Index()
+        public ActionResult Index(int personId)
         {
-            
-            return View(db.Reservations.ToList());
+            var dbReservations = db.Reservations.Where(r => r.PersonId == personId);
+            return View(dbReservations.ToList());
         }
 
         // GET: Reservations/Details/5
@@ -60,7 +60,7 @@ namespace GlobalHack.Controllers
                 reservation.Confirmed = true;
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Reservations", new {personId = reservation.PersonId});
             }
 
             return View(reservation);
