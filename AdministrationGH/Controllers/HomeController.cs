@@ -23,7 +23,25 @@ namespace AdministrationGH.Controllers
             var myReservations = context.Reservations.Where(r => r.ShelterId == myLocalShelter.First().Id);
 
             var youthShelters = context.Shelters.Where(ys => ys.MaxAge < 25 && ys.MaxAge != null);
-                //r => r.ShelterId = myLocalShelter.First().Id);
+            var youthSheltersBedsAvail = new Dictionary<Shelter,int>();
+            foreach (var sh in youthShelters)
+            {
+                youthSheltersBedsAvail.Add(sh, (sh.Reservations.Any() ? sh.Reservations.Count + sh.Reservations.Sum(r => r.Person.NumChildren) : 0)); //beds avaliable);
+            }
+
+            var maleOnlyShelters = context.Shelters.Where(fs => fs.GenderRestriction == 1);
+            var maleOnlySheltersBedsAvail = new Dictionary<Shelter, int>();
+            foreach (var fs in maleOnlyShelters)
+            {
+                maleOnlySheltersBedsAvail.Add(fs, (fs.Reservations.Any() ? fs.Reservations.Count + fs.Reservations.Sum(r => r.Person.NumChildren) : 0)); //beds avaliable);
+            }
+
+            var pregnantOnlyShelters = context.Shelters.Where(fs => fs.PregnantOnly);
+            var pregnantOnlySheltersBedsAvail = new Dictionary<Shelter, int>();
+            foreach (var fs in pregnantOnlyShelters)
+            {
+                pregnantOnlySheltersBedsAvail.Add(fs, (fs.Reservations.Any() ? fs.Reservations.Count + fs.Reservations.Sum(r => r.Person.NumChildren) : 0)); //beds avaliable);
+            }
 
             //I want a list of recent people and in my shelter
             //var allShelters = ;Where()
@@ -31,7 +49,10 @@ namespace AdministrationGH.Controllers
             ViewBag.myLocalShelter = myLocalShelter;
             ViewBag.myReservations = myReservations;
             ViewBag.bedsAvailable = 12;
-            ViewBag.youthShelters = youthShelters;
+            ViewBag.youthShelters = youthSheltersBedsAvail;
+            ViewBag.maleOnlyShelters = maleOnlySheltersBedsAvail;
+            ViewBag.pregnantOnlyShelters = pregnantOnlySheltersBedsAvail;
+
             // List of those staying tonight
 
             // Recent Referrals
