@@ -9,6 +9,7 @@ namespace GlobalHack.Models
     {
         public int Id { get; set; }
         public int PersonId { get; set; }
+        public Person Person { get; set; }
         public int ShelterId { get; set; }
         public DateTime Date { get; set; }
         public bool Confirmed { get; set; }

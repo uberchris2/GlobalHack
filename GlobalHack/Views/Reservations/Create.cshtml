@@ -1,0 +1,41 @@
+﻿@model GlobalHack.Models.Reservation
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.PersonId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", default_value = ViewBag.Person.Id } })
+    @Html.HiddenFor(model => model.ShelterId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", default_value = ViewBag.Shelter.Id } })
+
+    <div class="form-horizontal">
+        <h4>Reservation</h4>
+        <hr />
+        <div class="form-group">
+            Reservation for @Html.Raw(ViewBag.Person.Name)
+            @if (ViewBag.Person.NumChildren > 0)
+            {
+                <span>and @ViewBag.Person.NumChildren children</span>
+            }
+            at @ViewBag.Shelter.Name.
+        </div>
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
