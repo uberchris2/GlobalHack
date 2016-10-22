@@ -21,15 +21,21 @@ namespace GlobalHack.Controllers
             var person = db.Persons.Find(personId);
             ViewBag.PersonId = personId;
 
-            //max age
+
+
+            var asdasdasd = db.Shelters.Where(asdf => asdf.Reservations.Any())
+                .Select(shelter =>  shelter.Reservations.Sum(x => x.Person.NumChildren) ).ToList();
+
+
+
             var personAge = DateTime.Now.Year - person.BirthYear;
             var dbShelters = db.Shelters.Where(shelter => (shelter.MaxAge >= personAge)
                 && (shelter.MinAge <= personAge) //min age
                 && (shelter.GenderRestriction == 0 || shelter.GenderRestriction == person.Gender) //gender restriction
                 && (!shelter.PregnantOnly || person.Pregnant) //pregnant only
                 && (!shelter.SexOffenderRestriction || !person.SexOffender) //sex offender
-                && (shelter.Beds > shelter.Reservations.Count+person.NumChildren)); //beds avaliable
-
+                && shelter.Beds > (shelter.Reservations.Any() ? shelter.Reservations.Count + shelter.Reservations.Sum(r => r.Person.NumChildren) : 0) + person.NumChildren); //beds avaliable
+            
             return View(dbShelters.ToList());
         }
 
