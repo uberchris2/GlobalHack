@@ -10,26 +10,22 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
+    @Html.HiddenFor(model => model.PersonId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", default_value = ViewBag.Person.Id } })
+    @Html.HiddenFor(model => model.ShelterId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", default_value = ViewBag.Shelter.Id } })
+
     <div class="form-horizontal">
         <h4>Reservation</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.PersonId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PersonId, new { htmlAttributes = new { @class = "form-control", disabled="disabled", default_value = ViewBag.PersonId } })
-                @Html.ValidationMessageFor(model => model.PersonId, "", new { @class = "text-danger" })
-            </div>
+            Reservation for @Html.Raw(ViewBag.Person.Name)
+            @if (ViewBag.Person.NumChildren > 0)
+            {
+                <span>and @ViewBag.Person.NumChildren children</span>
+            }
+            at @ViewBag.Shelter.Name.
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ShelterId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ShelterId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", default_value = ViewBag.ShelterId } })
-                @Html.ValidationMessageFor(model => model.ShelterId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -39,9 +35,6 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

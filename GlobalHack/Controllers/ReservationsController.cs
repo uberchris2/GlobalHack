@@ -40,8 +40,10 @@ namespace GlobalHack.Controllers
         // GET: Reservations/Create
         public ActionResult Create(int shelterId, int personId)
         {
-            ViewBag.ShelterId = shelterId;
-            ViewBag.PersonId = personId;
+            var person = db.Persons.Find(personId);
+            var shelter = db.Shelters.Find(shelterId);
+            ViewBag.Person = person;
+            ViewBag.Shelter = shelter;
             return View();
         }
 
