@@ -34,7 +34,7 @@
         <td>
             @if (!item.Confirmed && item.Date.Date == DateTime.Now.Date)
             {
-                @Html.ActionLink("Confirm", "Comfirm", new { id = item.Id })
+                @Html.ActionLink("Confirm", "Confirm", new { id = item.Id })
             }
         </td>
     </tr>

@@ -123,6 +123,14 @@ namespace GlobalHack.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Confirm(int id)
+        {
+            var reservation = db.Reservations.Find(id);
+            reservation.Confirmed = true;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Reservations", new { personId = reservation.PersonId });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
