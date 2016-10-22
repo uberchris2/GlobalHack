@@ -16,9 +16,9 @@ namespace GlobalHack.Controllers
         private Data db = new Data();
 
         // GET: People
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View(db.Persons.ToList());
+            return View(db.Persons.Find(id));
         }
 
         // GET: People/Details/5

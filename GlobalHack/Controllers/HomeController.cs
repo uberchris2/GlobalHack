@@ -29,7 +29,7 @@ namespace GlobalHack.Controllers
             {
                 return RedirectToAction("Create", "People");
             }
-            return RedirectToAction("Index", "Reservations", new {personId = foundPerson.Id });
+            return RedirectToAction("Index", "People", new {id = foundPerson.Id });
         }
 
         protected override void Dispose(bool disposing)
