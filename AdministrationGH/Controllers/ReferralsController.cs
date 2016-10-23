@@ -23,8 +23,8 @@ namespace AdministrationGH.Controllers
 
         public ActionResult ReferralsPerPerson(int? id)
         {
-            //return View(db.Referrals.Where(r=> r.PersonId == id).Include(p=>p.Person).ToList());
-            return View(db.Referrals.Where(r => r.PersonId == id).ToList());
+            return View(db.Referrals.Where(r=> r.PersonId == id).Include(p=>p.Person).Include(s => s.Shelter).ToList());
+            //return View(db.Referrals.Where(r => r.PersonId == id).ToList());
         }
 
         // GET: Referrals/Details/5

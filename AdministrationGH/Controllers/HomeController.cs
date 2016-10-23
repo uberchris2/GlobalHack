@@ -21,7 +21,7 @@ namespace AdministrationGH.Controllers
             var myLocalShelter = context.Shelters.Where(n => n.Name.StartsWith("St.")).ToList().First();
 
             
-            var myReservations = context.Reservations.Where(x => x.ShelterId == myLocalShelter.Id).Include(p => p.Person).ToList();
+            var myReservations = context.Reservations.Where(x => x.ShelterId == myLocalShelter.Id && !x.NoShow).Include(p => p.Person).ToList();
             //myReservations = context.Reservations.Where(r => r.ShelterId == myLocalShelter.First().Id).ToList();
             
             //foreach (var fs in pregnantOnlyShelters)
@@ -62,7 +62,7 @@ namespace AdministrationGH.Controllers
         {
             var youthShelters = context.Shelters.Where(ys => ys.MaxAge < 25 && ys.MaxAge != null).Include(x => x.Reservations);
             var youthSheltersBedsAvail = new Dictionary<Shelter, int>();
-            youthSheltersBedsAvail = youthShelters.ToDictionary(ys => ys, ys => ys.Reservations.Any() ? ys.Reservations.Count + ys.Reservations.Sum(r => context.Persons.Find(r.PersonId).NumChildren) : 0);
+            youthSheltersBedsAvail = youthShelters.ToDictionary(ys => ys, ys => ys.Reservations.Any(r => !r.NoShow) ? ys.Reservations.Count(r => !r.NoShow) + ys.Reservations.Where(rs => !rs.NoShow).Sum(r => context.Persons.Find(r.PersonId).NumChildren) : 0);
             //foreach (var sh in youthShelters)
             //{
             //    youthSheltersBedsAvail.Add(sh, sh.Reservations.Any(r => r.ShelterId == sh.Id) ? sh.Reservations.Count + sh.Reservations.Sum(r => r.Person.NumChildren) : 0); //beds avaliable);
@@ -70,7 +70,7 @@ namespace AdministrationGH.Controllers
 
             var maleOnlyShelters = context.Shelters.Where(fs => fs.GenderRestriction == 1).Include(x => x.Reservations);
             var maleOnlySheltersBedsAvail = new Dictionary<Shelter, int>();
-            maleOnlySheltersBedsAvail = maleOnlyShelters.ToDictionary(ys => ys, ys => ys.Reservations.Any() ? ys.Reservations.Count + ys.Reservations.Sum(r => context.Persons.Find(r.PersonId).NumChildren) : 0);
+            maleOnlySheltersBedsAvail = maleOnlyShelters.ToDictionary(ys => ys, ys => ys.Reservations.Any(r => !r.NoShow) ? ys.Reservations.Count(r => !r.NoShow) + ys.Reservations.Where(rs => !rs.NoShow).Sum(r => context.Persons.Find(r.PersonId).NumChildren) : 0);
 
             //foreach (var fs in maleOnlyShelters)
             //{
@@ -79,7 +79,7 @@ namespace AdministrationGH.Controllers
 
             var pregnantOnlyShelters = context.Shelters.Where(fs => fs.PregnantOnly).Include(x => x.Reservations);
             var pregnantOnlySheltersBedsAvail = new Dictionary<Shelter, int>();
-            pregnantOnlySheltersBedsAvail = pregnantOnlyShelters.ToDictionary(ys => ys, ys => ys.Reservations.Any() ? ys.Reservations.Count + ys.Reservations.Sum(r => context.Persons.Find(r.PersonId).NumChildren) : 0);
+            pregnantOnlySheltersBedsAvail = pregnantOnlyShelters.ToDictionary(ys => ys, ys => ys.Reservations.Any(r => !r.NoShow) ? ys.Reservations.Count(r => !r.NoShow) + ys.Reservations.Where(r => !r.NoShow).Sum(r => context.Persons.Find(r.PersonId).NumChildren) : 0);
 
             ViewBag.youthShelters = youthSheltersBedsAvail;
             ViewBag.maleOnlyShelters = maleOnlySheltersBedsAvail;

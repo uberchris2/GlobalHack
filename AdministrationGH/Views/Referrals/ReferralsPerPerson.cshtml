@@ -1,27 +1,21 @@
 ﻿@model List<GlobalHack.Models.Referral>
 
 @{
-    ViewBag.Title = "ReferralsPerPerson";
+    ViewBag.Title = "Referrals Per Person";
 
 }
 
-
-
-
-
 <div>
-    
-    <h4>Referral</h4>
-    <hr/>
+   
     @foreach (var referal in Model)
     {
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => referal.PersonId)
+                @Html.DisplayNameFor(model => referal.Person.Name)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => referal.PersonId)
+                @Html.DisplayFor(model => referal.Person.Name)
             </dd>
 
             <dt>
@@ -41,11 +35,11 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => referal.ShelterId)
+                @Html.DisplayNameFor(model => referal.Shelter.Name)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => referal.ShelterId)
+                @Html.DisplayFor(model => referal.Shelter.Name)
             </dd>
 
         </dl>

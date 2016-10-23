@@ -9,7 +9,7 @@ namespace GlobalHack.Models
     public class Person
     {
         public int Id { get; set; }
-        [Display(Name = "Name")]
+        [Display(Name = "Client Name")]
         public string Name { get; set; }
         [Display(Name = "Birth Year")]
         public int BirthYear { get; set; }
