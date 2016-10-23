@@ -7,7 +7,12 @@
 <script src='https://api.mapbox.com/mapbox.js/v3.0.0/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v3.0.0/mapbox.css' rel='stylesheet' />
 
-<h1>@Html.ActionLink("Home", "Index", "People", new { Id = ViewBag.PersonId }, null) > Shelters</h1>
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "People", new { Id = ViewBag.PersonId }, null)</li>
+    <li class="active">Shelters</li>
+</ul>
+
 
 
 <div id="map" style="height: 600px;width: 100%"></div>

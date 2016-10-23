@@ -4,7 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h1>@Html.ActionLink("Home", "Index", "People", new { Id = ViewBag.PersonId }, null) > Reservations</h1>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "People", new { Id = ViewBag.PersonId }, null)</li>
+    <li class="active">Reservations</li>
+</ul>
+
+
 
 <table class="table">
     <tr>
