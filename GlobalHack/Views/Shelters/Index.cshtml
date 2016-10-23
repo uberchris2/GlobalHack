@@ -8,12 +8,15 @@
 <link href='https://api.mapbox.com/mapbox.js/v3.0.0/mapbox.css' rel='stylesheet' />
 
 
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "People", new { Id = ViewBag.PersonId }, null)</li>
+    <li class="active">Shelters</li>
+</ul>
+
+
+
 <div id="map" style="height: 600px;width: 100%"></div>
 
-
-<div>
-    @Html.ActionLink("Back to options", "Index", "People", new { Id = ViewBag.PersonId }, null)
-</div>
 
 <script>
     var shelters = @Html.Raw(Json.Encode(Model));

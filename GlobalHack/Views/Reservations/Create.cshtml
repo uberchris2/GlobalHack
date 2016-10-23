@@ -4,10 +4,15 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create Reservation</h2>
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "People", new { Id = ViewBag.Person.Id }, null)</li>
+    <li>@Html.ActionLink("Shelters", "Index", "Shelters", new { personId = ViewBag.Person.Id }, null)</li>
+    <li class="active">Create Reservation</li>
+</ul>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -15,20 +20,29 @@
     @Html.HiddenFor(model => model.ShelterId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", default_value = ViewBag.Shelter.Id } })
 
     <div class="form-horizontal">
-        <hr />
         <div class="form-group">
-            Reservation for @Html.Raw(ViewBag.Person.Name)
-            @if (ViewBag.Person.NumChildren > 0)
-            {
-                <span>and @ViewBag.Person.NumChildren children</span>
-            }
-            at @ViewBag.Shelter.Name.
+            <div class="col-md-10">
+                <h2>People</h2>
+                        <ul class="list-group">
+                            <li class="list-group-item">1 adult</li>
+                            <li class="list-group-item">@ViewBag.Person.NumChildren children</li>
+                        </ul>
+                <h2>Shelter</h2>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>@ViewBag.Shelter.Name</strong><br />
+                            @ViewBag.Shelter.Phone<br />
+                            @ViewBag.Shelter.Address</li>
+                        </ul>
+                
+
+            </div>
+
         </div>
-        
+
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-12 pull-right">
+                <input type="submit" value="Reserve" class="btn btn-lg btn-primary" />
             </div>
         </div>
     </div>

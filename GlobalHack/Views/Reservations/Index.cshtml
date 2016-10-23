@@ -4,7 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Reservations</h2>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "People", new { Id = ViewBag.PersonId }, null)</li>
+    <li class="active">Reservations</li>
+</ul>
+
+
 
 <table class="table">
     <tr>
@@ -13,6 +18,9 @@
         </th>
         <th>
             Address
+        </th>
+        <th>
+            Phone
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
@@ -32,6 +40,9 @@
             @Html.DisplayFor(modelItem => item.Shelter.Address)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Shelter.Phone)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
@@ -47,7 +58,3 @@
 }
 
 </table>
-
-<div>
-    @Html.ActionLink("Back to options", "Index", "People", new { Id = ViewBag.PersonId }, null)
-</div>

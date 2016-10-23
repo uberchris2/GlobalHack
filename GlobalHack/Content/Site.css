@@ -22,3 +22,5 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.breadcrumb li {font-size: 28px;}

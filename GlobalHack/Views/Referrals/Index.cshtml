@@ -4,8 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Referrals</h2>
-
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "People", new { Id = ViewBag.PersonId }, null)</li>
+    <li class="active">Referrals</li>
+</ul>
 
 <table class="table">
     <tr>
@@ -35,7 +37,3 @@
 }
 
 </table>
-
-<div>
-    @Html.ActionLink("Back to options", "Index", "People", new { Id = ViewBag.PersonId }, null)
-</div>
