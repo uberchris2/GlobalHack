@@ -1,0 +1,97 @@
+﻿@using GlobalHack.Models
+
+@{
+    ViewBag.Title = "Shelters in the Region";
+    var youthShelters = (Dictionary<GlobalHack.Models.Shelter, int>)ViewBag.youthShelters;
+    var maleOnlyShelters = (Dictionary<GlobalHack.Models.Shelter, int>)ViewBag.maleOnlyShelters;
+    var pregnantOnlyShelters = (Dictionary<GlobalHack.Models.Shelter, int>)ViewBag.pregnantOnlyShelters;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2> Youth Shelters</h2>
+        @if (youthShelters.Count == 0)
+            {
+            <div class="row">
+                <div class="col-md-8">
+                    No youth shelters for tonight!
+                </div>
+            </div>
+        }
+        else
+        {
+            foreach (KeyValuePair<Shelter, int> ys in youthShelters)
+            {
+                <div class="row">
+                    <div class="col-md-8">
+                    <h4>
+                        Name- @Html.DisplayFor(modelItem => ys.Key.Name) <br />
+                        Beds Available / Total Beds - @(ys.Key.Beds - ys.Value) / @(ys.Key.Beds)
+                    </h4>
+                        Contact Phone- @Html.DisplayFor(modelItem => ys.Key.Phone) <br />
+                        Address- @Html.DisplayFor(modelItem => ys.Key.Location) 
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2> Male Only Shelters</h2>
+        @if (maleOnlyShelters.Count == 0)
+            {
+            <div class="row">
+                <div class="col-md-8">
+                    No youth shelters for tonight!
+                </div>
+            </div>
+        }
+        else
+        {
+            foreach (KeyValuePair<Shelter, int> mOS in maleOnlyShelters)
+            {
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4>
+                            Name- @Html.DisplayFor(modelItem => mOS.Key.Name) <br />
+                            Beds Available / Total Beds - @(mOS.Key.Beds - mOS.Value) / @(mOS.Key.Beds)
+                        </h4>
+                        Address- @Html.DisplayFor(modelItem => mOS.Key.Location) <br/>
+                        Contact Phone- @Html.DisplayFor(modelItem => mOS.Key.Phone)
+                        <br/>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2> Pregnant Only Shelters</h2>
+        @if (pregnantOnlyShelters.Count == 0)
+            {
+            <div class="row">
+                <div class="col-md-8">
+                    No youth shelters for tonight!
+                </div>
+            </div>
+        }
+        else
+        {
+            foreach (KeyValuePair<Shelter, int> pOS in pregnantOnlyShelters)
+            {
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4>
+                            Name- @Html.DisplayFor(modelItem => pOS.Key.Name) <br />
+                            Beds Available / Total Beds - @(pOS.Key.Beds - pOS.Value) / @(pOS.Key.Beds)
+                        </h4>
+                        Contact Phone- @Html.DisplayFor(modelItem => pOS.Key.Phone) <br />
+                        Address- @Html.DisplayFor(modelItem => pOS.Key.Location) <br/>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
