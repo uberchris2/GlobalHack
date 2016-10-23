@@ -155,6 +155,10 @@
     <Compile Include="Migrations\201610222252390_correctFK.Designer.cs">
       <DependentUpon>201610222252390_correctFK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610230052219_UpdatingPerson.cs" />
+    <Compile Include="Migrations\201610230052219_UpdatingPerson.Designer.cs">
+      <DependentUpon>201610230052219_UpdatingPerson.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Referral.cs" />
     <Compile Include="Models\Shelter.cs" />
@@ -240,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610222252390_correctFK.resx">
       <DependentUpon>201610222252390_correctFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610230052219_UpdatingPerson.resx">
+      <DependentUpon>201610230052219_UpdatingPerson.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
