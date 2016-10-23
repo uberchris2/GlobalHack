@@ -39,25 +39,40 @@
         {
             if (i%3 == 0) {
                 @Html.Raw("<div class=\"row\">");
-                    <div class="col-md-4">
-                        Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
-                        Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
-                        Person Name - @Html.DisplayFor(modelItem => reservation.Person.Name) <br/>
-                    </div>
+                <div class="col-md-4">
+                    Person Name - @Html.DisplayFor(modelItem => reservation.Person.Name) <br />
+                    Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
+                    Has it been Confirmed? - @if (reservation.Confirmed)
+                    {  @Html.Raw("Confirmed");
+                    }
+                    else
+                    { @Html.Raw("Unconfirmed");
+                    }  <br />
+                </div>
             }
             if (@i%3==1) {
-                    <div class="col-md-4">
-                        Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
-                        Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
-                        Person Name - @Html.DisplayFor(modelItem => reservation.Person.Name) <br/>
-                    </div>
+                <div class="col-md-4">
+                    Person Name - @Html.DisplayFor(modelItem => reservation.Person.Name) <br/>
+                    Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
+                    Has it been Confirmed? - @if (reservation.Confirmed)
+                    {  @Html.Raw("Confirmed");
+                    }
+                    else
+                    { @Html.Raw("Unconfirmed");
+                    }  <br />
+                </div>
             }
             if (@i%3==2) {
-                    <div class="col-md-4">
-                        Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
-                        Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
-                        Person Name - @Html.DisplayFor(modelItem => reservation.Person.Name) <br/>
-                    </div>
+                <div class="col-md-4">
+                    Person Name - @Html.DisplayFor(modelItem => reservation.Person.Name) <br />
+                    Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
+                    Has it been Confirmed? - @if (reservation.Confirmed)
+                    {  @Html.Raw("Confirmed");
+                    }
+                    else
+                    { @Html.Raw("Unconfirmed");
+                    }  <br />
+                </div>
                 @Html.Raw("</div>");
             }
             i++;
