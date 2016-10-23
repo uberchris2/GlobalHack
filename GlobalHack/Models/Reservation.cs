@@ -14,5 +14,6 @@ namespace GlobalHack.Models
         public Shelter Shelter { get; set; }
         public DateTime Date { get; set; }
         public bool Confirmed { get; set; }
+        public bool NoShow { get; set; }
     }
 }

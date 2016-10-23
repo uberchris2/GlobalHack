@@ -42,21 +42,21 @@
                     <div class="col-md-4">
                         Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
                         Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
-                        Person Name - @Html.DisplayFor(modelItem => reservation.PersonId) <br/>
+                        Person Name - @Html.DisplayFor(modelItem => reservation.Person.Name) <br/>
                     </div>
             }
             if (@i%3==1) {
                     <div class="col-md-4">
                         Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
                         Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
-                        Person Name - @Html.DisplayFor(modelItem => reservation.PersonId) <br/>
+                        Person Name - @Html.DisplayFor(modelItem => reservation.Person.Name) <br/>
                     </div>
             }
             if (@i%3==2) {
                     <div class="col-md-4">
                         Date - @Html.DisplayFor(modelItem => reservation.Date) <br/>
                         Has it been Confirmed? - @Html.DisplayFor(modelItem => reservation.Confirmed) <br/>
-                        Person Name - @Html.DisplayFor(modelItem => reservation.PersonId) <br/>
+                        Person Name - @Html.DisplayFor(modelItem => reservation.Person.Name) <br/>
                     </div>
                 @Html.Raw("</div>");
             }
@@ -125,7 +125,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h2> Family-Oriented Shelters</h2>
+            <h2> Pregnant Only Shelters</h2>
             @if (pregnantOnlyShelters.Count == 0)
             {
                 <div class="row">
@@ -137,6 +137,35 @@
             else
             {
                 foreach (KeyValuePair<Shelter,int> pOS in pregnantOnlyShelters)
+                {
+                    <div class="row">
+                        <div class="col-md-8">
+                            Name- @Html.DisplayFor(modelItem => pOS.Key.Name) <br />
+                            Contact Phone- @Html.DisplayFor(modelItem => pOS.Key.Phone) <br />
+                            Address- @Html.DisplayFor(modelItem => pOS.Key.Location) <br />
+                            Total Beds- @Html.DisplayFor(modelItem => pOS.Key.Beds) <br />
+                            Total Beds Available- @pOS.Value <br />
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h2> Pregnant Only Shelters</h2>
+            @if (pregnantOnlyShelters.Count == 0)
+            {
+                <div class="row">
+                    <div class="col-md-8">
+                        No youth shelters for tonight!
+                    </div>
+                </div>
+            }
+            else
+            {
+                foreach (KeyValuePair<Shelter, int> pOS in pregnantOnlyShelters)
                 {
                     <div class="row">
                         <div class="col-md-8">

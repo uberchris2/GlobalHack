@@ -100,6 +100,26 @@
                 </div>
             </div>
         </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.PregnantOnly, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.PregnantOnly)
+                    @Html.ValidationMessageFor(model => model.PregnantOnly, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SexOffenderRestriction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.SexOffenderRestriction)
+                    @Html.ValidationMessageFor(model => model.SexOffenderRestriction, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

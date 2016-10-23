@@ -21,7 +21,7 @@ namespace AdministrationGH.Controllers
             var myLocalShelter = context.Shelters.Where(n => n.Name.StartsWith("St.")).ToList().First();
 
             
-            var myReservations = context.Reservations.Where(x => x.ShelterId == myLocalShelter.Id).ToList();
+            var myReservations = context.Reservations.Where(x => x.ShelterId == myLocalShelter.Id).Include(p => p.Person).ToList();
             //myReservations = context.Reservations.Where(r => r.ShelterId == myLocalShelter.First().Id).ToList();
             var youthShelters = context.Shelters.Where(ys => ys.MaxAge < 25 && ys.MaxAge != null).Include(x => x.Reservations);
             var youthSheltersBedsAvail = new Dictionary<Shelter,int>();

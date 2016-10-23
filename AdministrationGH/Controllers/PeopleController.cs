@@ -79,7 +79,7 @@ namespace AdministrationGH.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,BirthYear,Gender,NumChildren,Pregnant,Transgender,SexOffender")] Person person)
+        public ActionResult Edit([Bind(Include = "Id,Name,BirthYear,Gender,NumChildren,Pregnant,Transgender,SexOffender,Username,Password")] Person person)
         {
             if (ModelState.IsValid)
             {
