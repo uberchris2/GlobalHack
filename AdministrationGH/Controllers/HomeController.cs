@@ -22,6 +22,8 @@ namespace AdministrationGH.Controllers
 
             
             var myReservations = context.Reservations.Where(x => x.ShelterId == myLocalShelter.Id && !x.NoShow).Include(p => p.Person).ToList();
+            int reservationsCount = myReservations.Any() ? myReservations.Count(r => !r.NoShow) + myReservations.Where(rs => !rs.NoShow).Sum(r => context.Persons.Find(r.PersonId).NumChildren) : 0;
+
             //myReservations = context.Reservations.Where(r => r.ShelterId == myLocalShelter.First().Id).ToList();
             
             //foreach (var fs in pregnantOnlyShelters)
@@ -34,7 +36,8 @@ namespace AdministrationGH.Controllers
             ViewBag.allShelters = allShelters;
             ViewBag.myLocalShelter = myLocalShelter;
             ViewBag.myReservations = myReservations;
-            ViewBag.bedsAvailable = 12;
+            ViewBag.bedsAvailable = myLocalShelter.Beds;
+            ViewBag.reservationsCount = reservationsCount;
 
 
             // List of those staying tonight

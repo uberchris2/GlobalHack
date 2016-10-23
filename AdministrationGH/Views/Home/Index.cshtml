@@ -7,6 +7,8 @@
     var myLocalShelter = (GlobalHack.Models.Shelter)ViewBag.myLocalShelter;
     var myReservations = (List<GlobalHack.Models.Reservation>)ViewBag.myReservations;
     var myBedsAvailable = (int?)ViewBag.bedsAvailable;
+    var reservationsCount = (int?)ViewBag.reservationsCount;
+    
 }
 
 <div class="row">
@@ -17,7 +19,7 @@
     @Html.DisplayNameFor(model => model.Phone) - @Html.DisplayFor(modelItem => myLocalShelter.Phone)<br />
     @Html.DisplayNameFor(model => model.Beds) - @Html.DisplayFor(modelItem => myLocalShelter.Beds) <br />
     @Html.DisplayNameFor(model => model.Location) - @Html.DisplayFor(modelItem => myLocalShelter.Location) <br />
-    Beds Available -  @myBedsAvailable <br />
+    Beds Available - @(myBedsAvailable - reservationsCount) of @myBedsAvailable<br />
 
     <h4>Reservations Tonight- @DateTime.Now.Date.ToLongDateString()</h4>
     @if (myReservations.Count == 0)
@@ -39,15 +41,13 @@
                     Client Name- @Html.ActionLink(reservation.Person.Name + " (View Referrals)", "ReferralsPerPerson", "Referrals",new { id = reservation.PersonId},null)<br/>
                     Has it been Confirmed? - @if (reservation.Confirmed)
                                              {
-                                                 @Html.Raw("Confirmed")
-                                                 ;
+                                                 @Html.Raw("Confirmed");
                                              }
                                              else
                                              {
-                                                 @Html.Raw("Unconfirmed")
-                                                 ;
+                                                 @Html.Raw("Unconfirmed");
                                              } <br/>
-                    @Html.ActionLink("No Show", "SetNoShow", "Reservations",new {id = reservation.Id}, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Defer", "SetNoShow", "Reservations",new {id = reservation.Id}, new { @class = "btn btn-warning" })
                     @Html.ActionLink("No Show", "SetNoShow", "Reservations", new { id = reservation.Id }, new {@class = "btn btn-danger" })
                 </div>
             }
@@ -60,7 +60,7 @@
                     else
                     { @Html.Raw("Unconfirmed");
                     }  <br />
-                    @Html.ActionLink("No Show", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Defer", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("No Show", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-danger" })
                 </div>
             }
@@ -73,7 +73,7 @@
                     else
                     { @Html.Raw("Unconfirmed");
                     }  <br />
-                    @Html.ActionLink("No Show", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Defer", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("No Show", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-danger" })
                 </div>
                 @Html.Raw("</div>");
@@ -81,7 +81,6 @@
             i++;
         }
     }
-            @Html.ActionLink("Track New Shelter", "Create", "Shelters")
         </div>
     </div>
 
