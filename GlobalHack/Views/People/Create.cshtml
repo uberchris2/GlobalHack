@@ -4,7 +4,10 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Register</h2>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home", null, null)</li>
+    <li class="active">Register</li>
+</ul>
 
 
 @using (Html.BeginForm()) 

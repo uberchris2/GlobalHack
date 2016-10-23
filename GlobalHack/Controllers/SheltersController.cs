@@ -34,7 +34,8 @@ namespace GlobalHack.Controllers
                 && (shelter.GenderRestriction == 0 || shelter.GenderRestriction == person.Gender) //gender restriction
                 && (!shelter.PregnantOnly || person.Pregnant) //pregnant only
                 && (!shelter.SexOffenderRestriction || !person.SexOffender) //sex offender
-                && shelter.Beds > (shelter.Reservations.Any() ? shelter.Reservations.Count + shelter.Reservations.Sum(r => r.Person.NumChildren) : 0) + person.NumChildren); //beds avaliable
+                && shelter.Beds > (shelter.Reservations.Any() ? 
+                    shelter.Reservations.Count(r => !r.NoShow) + shelter.Reservations.Where(r => !r.NoShow).Sum(r => r.Person.NumChildren) : 0) + person.NumChildren); //beds avaliable
             
             return View(dbShelters.ToList());
         }
