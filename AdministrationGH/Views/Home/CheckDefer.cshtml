@@ -1,0 +1,85 @@
+﻿
+
+@{
+    ViewBag.Title = "Check Deferment Options";
+    var currentReservation = (GlobalHack.Models.Reservation) ViewBag.currentReservation;
+    var possibleShelters = (IEnumerable<GlobalHack.Models.Shelter>)ViewBag.possibleShelters;
+    var curRevId = (int?)ViewBag.curRevId;
+
+
+    var myReservations = (List<GlobalHack.Models.Reservation>)ViewBag.myReservations;
+    var myBedsAvailable = (int?)ViewBag.bedsAvailable;
+    var reservationsCount = (int?)ViewBag.reservationsCount;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Current Reservation</h3>
+            Name- @Html.DisplayFor(modelItem => currentReservation.Shelter.Name) <br />
+            Contact Phone- @Html.DisplayFor(modelItem => currentReservation.Shelter.Phone) <br />
+            Address- @Html.DisplayFor(modelItem => currentReservation.Shelter.Address)
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @if (!possibleShelters.Any())
+        {
+            <div class="col-md-12">
+                No youth shelters for tonight!
+            </div>
+        }
+        else
+        {
+
+            int i = 0;
+            foreach (var sh in possibleShelters)
+            {
+                if (i % 3 == 0 && i == 0)
+                {
+                    <h3>Possible Shelters with Availability</h3>
+                    @Html.Raw("<div class=\"row\">");
+                    
+                    <div class="col-md-4">
+                        Name- @Html.DisplayFor(modelItem => sh.Name) <br />
+                        Contact Phone- @Html.DisplayFor(modelItem => sh.Phone) <br />
+                        Address- @Html.DisplayFor(modelItem => sh.Location) <br />
+                        @Html.ActionLink("Confirm Deferment", "ConfirmDefer", "Home", new { reservationId = curRevId, newShelterId = sh.Id }, new { @class = "btn btn-warning" })
+                    </div>
+                }
+                if (i % 3 == 0 && i > 0)
+                {
+                    @Html.Raw("<div class=\"row\">");
+                    <div class="col-md-4">
+                        Name- @Html.DisplayFor(modelItem => sh.Name) <br />
+                        Contact Phone- @Html.DisplayFor(modelItem => sh.Phone) <br />
+                        Address- @Html.DisplayFor(modelItem => sh.Location) <br />
+                        @Html.ActionLink("Confirm Deferment", "ConfirmDefer", "Home", new { reservationId = curRevId, newShelterId = sh.Id }, new { @class = "btn btn-warning" })
+                    </div>
+                }
+                if (@i % 3 == 1)
+                {
+                    <div class="col-md-4">
+                        Name- @Html.DisplayFor(modelItem => sh.Name) <br />
+                        Contact Phone- @Html.DisplayFor(modelItem => sh.Phone) <br />
+                        Address- @Html.DisplayFor(modelItem => sh.Location) <br />
+                        @Html.ActionLink("Confirm Deferment", "ConfirmDefer", "Home", new { reservationId = curRevId, newShelterId = sh.Id }, new { @class = "btn btn-warning" })
+                    </div>
+                }
+                if (@i % 3 == 2)
+                {
+                    <div class="col-md-4">
+                        Name- @Html.DisplayFor(modelItem => sh.Name) <br />
+                        Contact Phone- @Html.DisplayFor(modelItem => sh.Phone) <br />
+                        Address- @Html.DisplayFor(modelItem => sh.Location) <br />
+                        @Html.ActionLink("Confirm Deferment", "ConfirmDefer", "Home", new { reservationId = curRevId, newShelterId = sh.Id }, new { @class = "btn btn-warning" })
+                    </div>
+                    @Html.Raw("</div>")
+                    ;
+                }
+                i++;
+
+            }
+        }
+    </div>
+</div>

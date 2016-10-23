@@ -205,6 +205,8 @@
     <Content Include="Views\Referrals\Index.cshtml" />
     <Content Include="Views\Home\CommonShelters.cshtml" />
     <Content Include="Views\Referrals\ReferralsPerPerson.cshtml" />
+    <Content Include="Views\Home\CheckDefer.cshtml" />
+    <Content Include="Views\Home\ConfirmDefer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

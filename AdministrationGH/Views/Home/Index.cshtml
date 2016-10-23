@@ -47,7 +47,7 @@
                                              {
                                                  @Html.Raw("Unconfirmed");
                                              } <br/>
-                    @Html.ActionLink("Defer", "SetNoShow", "Reservations",new {id = reservation.Id}, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Defer", "CheckDefer", "Home",new {id = reservation.Id}, new { @class = "btn btn-warning" })
                     @Html.ActionLink("No Show", "SetNoShow", "Reservations", new { id = reservation.Id }, new {@class = "btn btn-danger" })
                 </div>
             }
@@ -60,7 +60,7 @@
                     else
                     { @Html.Raw("Unconfirmed");
                     }  <br />
-                    @Html.ActionLink("Defer", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Defer", "CheckDefer", "Home", new { id = reservation.Id }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("No Show", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-danger" })
                 </div>
             }
@@ -73,7 +73,7 @@
                     else
                     { @Html.Raw("Unconfirmed");
                     }  <br />
-                    @Html.ActionLink("Defer", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Defer", "CheckDefer", "Home", new { id = reservation.Id }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("No Show", "SetNoShow", "Reservations", new { id = reservation.Id }, new { @class = "btn btn-danger" })
                 </div>
                 @Html.Raw("</div>");

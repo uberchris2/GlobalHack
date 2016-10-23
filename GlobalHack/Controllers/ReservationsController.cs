@@ -93,29 +93,7 @@ namespace GlobalHack.Controllers
             reservation.NoShow = true;
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
-            //if (reservation == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(reservation);
         }
-
-        //public ActionResult SetDefer(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Reservation reservation = db.Reservations.Find(id);
-        //    reservation.NoShow = true;
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index", "Home");
-        //    //if (reservation == null)
-        //    //{
-        //    //    return HttpNotFound();
-        //    //}
-        //    //return View(reservation);
-        //}
 
         // POST: Reservations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

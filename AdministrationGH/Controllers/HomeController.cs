@@ -47,6 +47,41 @@ namespace AdministrationGH.Controllers
             return View();
         }
 
+        public ActionResult CheckDefer(int? id)
+        {
+            var reservation = context.Reservations.Find(id);
+            var reservation2 = context.Reservations.Where(r => r.Id ==id).Include(x => x.Shelter).ToList().First();
+            var person = context.Persons.Find(reservation.PersonId);
+            ViewBag.PersonId = person.Id;
+
+            var personAge = DateTime.Now.Year - person.BirthYear;
+            var dbShelters = context.Shelters.Where(shelter => (shelter.MaxAge >= personAge)
+                && (shelter.MinAge <= personAge) //min age
+                && (shelter.GenderRestriction == 0 || shelter.GenderRestriction == person.Gender) //gender restriction
+                && (!shelter.PregnantOnly || person.Pregnant) //pregnant only
+                && (!shelter.SexOffenderRestriction || !person.SexOffender) //sex offender
+                && (shelter.Id != reservation.ShelterId)
+                && shelter.Beds > (shelter.Reservations.Any() ?
+                    shelter.Reservations.Count(r => !r.NoShow) + shelter.Reservations.Where(r => !r.NoShow).Sum(r => r.Person.NumChildren) : 0) + person.NumChildren); //beds avaliable
+
+            ViewBag.curRevId = id;
+            ViewBag.currentReservation = reservation2;
+            ViewBag.possibleShelters = dbShelters;
+
+            return View(dbShelters.ToList());
+
+        }
+
+        public ActionResult ConfirmDefer(int? reservationId , int? newShelterId )
+        {
+            var reservation = context.Reservations.Find(reservationId);
+            var newShelter = context.Shelters.Find(newShelterId);
+            reservation.ShelterId = newShelter.Id;
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
